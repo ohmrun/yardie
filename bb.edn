@@ -1,0 +1,5 @@
+{
+ :deps {
+        ohmrun/yardie { :local/root "." }
+ }
+}
