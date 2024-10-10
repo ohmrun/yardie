@@ -18,12 +18,12 @@
   (if
    (nil? (host_folder))
     [
-     "podman" "run"
+     "docker" "run"
      "--name" name
      "--rm" "-it" name
      ]
     [
-     "podman" "run"
+     "docker" "run"
      "--mount" (str/join "," ["type=bind" (str/join "=" ["source"  (str/join "/" [(fs/cwd) server])]) "target=/srv" ])
      "--name" name
      "--rm" "-it" name
