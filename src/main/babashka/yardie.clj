@@ -2,7 +2,7 @@
   (:require [babashka.fs :as fs]))
 (require '[babashka.fs :as fs] '[clojure.string :as str] '[babashka.process :as proc])
 
-(defn sanity [_] {:ok true})
+(defn sanity [] {:ok true})
 
 (defn instance_name [] (System/getenv "YARDIE_INSTANCE_NAME"))
 (if (nil? (instance_name)) (throw (Exception. "set YARDIE_INSTANCE_NAME")) ())
@@ -10,9 +10,9 @@
 (defn host_folder [] (System/getenv "YARDIE_HOST_FOLDER_PATH"))
 ;; (if (nil? (host_folder)) (throw (Exception. "set YARDIE_HOST_FOLDER_PATH")) ())
 
-(defn build [_] (proc/shell "docker" "build" "." "--tag" (yardie/instance_name)))
-(defn stop [_] (proc/shell "docker" "stop" (yardie/instance_name)))
-(defn connect [_] (proc/shell "docker" "exec" "-it" (yardie/instance_name) "/bin/bash"))
+(defn build [] (proc/shell "docker" "build" "." "--tag" (yardie/instance_name)))
+(defn stop [] (proc/shell "docker" "stop" (yardie/instance_name)))
+(defn connect [] (proc/shell "docker" "exec" "-it" (yardie/instance_name) "/bin/bash"))
 
 (defn command [name server]
   (if
@@ -30,14 +30,14 @@
      ]
     ) 
   )
-(defn command_local [_] 
+(defn command_local [] 
   (
    let
    [name (yardie/instance_name)
     server (yardie/host_folder)]
     (command name server))
   )
-(defn run [_]
+(defn run []
   (let [command (command_local nil)]
     (prn command)
       (apply proc/shell command)
