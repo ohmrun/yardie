@@ -38,7 +38,7 @@
     (command name server))
   )
 (defn run []
-  (let [command (command_local nil)]
+  (let [command (command_local)]
     (prn command)
       (apply proc/shell command)
     ))
